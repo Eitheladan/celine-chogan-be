@@ -2,7 +2,9 @@ const News = require('../models/News');
 const fs = require('fs');
 
 exports.getAllNews = (req, res, next) => {
-    News.find()
+    News.find().sort({
+            "_id": -1
+        })
         .then(news => res.status(200).json(news))
         .catch(error => res.status(500).json({
             error
