@@ -46,6 +46,8 @@ exports.deleteNews = (req, res, next) => {
 exports.createNews = (req, res, next) => {
     console.log(req.body);
     console.log(req.file.filename)
+    let date = Date();
+    console.log(date);
     const newsObject = JSON.parse(JSON.stringify(req.body));
     console.log(newsObject);
     delete newsObject;
@@ -54,6 +56,7 @@ exports.createNews = (req, res, next) => {
         // opérateur spread JS
         ...newsObject,
         image: req.file.filename,
+        date: date,
     });
     news.save()
         .then(() => res.status(201).json({

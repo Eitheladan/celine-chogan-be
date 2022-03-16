@@ -13,6 +13,10 @@ const newsShema = mongoose.Schema({
         type: String,
         require: true
     },
+    date: {
+        type: Date,
+        require: true
+    }
 });
 
 module.exports = mongoose.model('News', newsShema);
