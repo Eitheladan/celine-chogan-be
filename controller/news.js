@@ -29,20 +29,23 @@ exports.deleteNews = (req, res, next) => {
         })
         .then(news => {
             console.log(news);
-            // const filename = news.image;           
-            News.deleteOne({
-                    _id: req.params.id
-                })
-                .then(() => res.status(200).json({
-                    message: 'Objet supprimé !'
-                }))
-                .catch(error => res.status(400).json({
-                    error
-                }));
-        })
-        .catch(error => res.status(500).json({
+            const filename = news.image;
+            console.log(filename)
+            fs.unlink(`images/${filename}`, () => {
+                News.deleteOne({
+                        _id: req.params.id
+                    })
+                    .then(() => res.status(200).json({
+                        message: 'Objet supprimé !'
+                    }))
+                    .catch(error => res.status(400).json({
+                        error
+                    }));
+            })
+
+        }).catch(error => res.status(500).json({
             error
-        }))
+        }));
 };
 
 exports.createNews = (req, res, next) => {
