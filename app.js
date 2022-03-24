@@ -101,16 +101,20 @@ app.use('/api/news', routeNews);
 const routeUser = require('./routes/user.js');
 app.use('/api/user', routeUser);
 
+const routeInfos = require('./routes/infos');
+app.use('/api/infos', routeInfos);
+
 const routeMailer = require('./routes/mailer.js');
 app.use('/api/mailer', routeMailer);
 
 // const routeRole = require('./routes/role.js');
 // app.use('/api/role', routeRole);
 
-// Création des roles dans la bdd et du user Admin
+// Création des roles dans la bdd, du user Admin et des infos Admin
 
 const Role = db.role;
 const User = db.user;
+const Infos = db.infos;
 
 function initial() {
     Role.estimatedDocumentCount((err, count) => {
@@ -153,6 +157,24 @@ function initial() {
             }
 
         });
+    });
+    Infos.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            new Infos({
+                infos: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt totam dolorum, ducimus obcaecati, voluptas facilis molestias nobis ut quam natus similique inventore excepturi optio ipsa deleniti fugit illo. Unde, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum illo necessitatibus perspiciatis! Aperiam perferendis labore temporibus, eos culpa corporis recusandae quas, fuga voluptatibus nesciunt odit libero tenetur neque consequatur ea.",
+                adresse: {
+                    numero: 5,
+                    rue: "Rue de la mairie",
+                    CP: 29870,
+                    ville: "TREGLONOUS"
+                },
+            }).save(err => {
+                if (err) {
+                    console.log("error", err);
+                }
+                console.log("added 'infos admin' to infos collection");
+            });
+        }
     });
 }
 
