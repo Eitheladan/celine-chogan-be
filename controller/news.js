@@ -49,17 +49,11 @@ exports.deleteNews = (req, res, next) => {
 };
 
 exports.createNews = (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file.filename)
     let date = Date();
-    console.log(date);
     const newsObject = JSON.parse(JSON.stringify(req.body));
-    console.log(newsObject);
-    delete newsObject;
-    console.log(req.file);
     const news = new News({
         // opérateur spread JS
-        ...newsObject,
+        ...req.body,
         image: req.file.filename,
         date: date,
     });

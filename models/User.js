@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 const uniqueValidator = require('mongoose-unique-validator');
 
@@ -20,10 +21,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    roleId: {
-        type: String,
-        require: true
-    },
+    role: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Roles'
+    }],
 });
 
 userSchema.plugin(uniqueValidator);

@@ -3,7 +3,14 @@ const mongoose = require("mongoose");
 const Role = mongoose.model(
   "Role",
   new mongoose.Schema({
-    name: String
+    _id: {
+      type: Number,
+      require: true
+    },
+    name: {
+      type: String,
+      require: true
+    },
   })
 );
 

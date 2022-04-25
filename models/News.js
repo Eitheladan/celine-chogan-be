@@ -15,6 +15,7 @@ const newsShema = mongoose.Schema({
     },
     date: {
         type: Date,
+        default: Date.now,
         require: true
     }
 });

@@ -10,6 +10,7 @@ exports.getInfos = (req, res, next) => {
 };
 
 exports.updateInfos = (req, res, next) => {
+    console.log(req.body);
     Infos.updateOne({
             _id: req.params.id
         }, {

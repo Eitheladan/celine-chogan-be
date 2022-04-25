@@ -120,15 +120,17 @@ function initial() {
     Role.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             new Role({
+                _id: 2,
                 name: "user"
             }).save(err => {
                 if (err) {
                     console.log("error", err);
                 }
-                console.log("added 'user' to roles collection");
+                console.log("added 'user' to role collection");
             });
 
             new Role({
+                _id: 1,
                 name: "admin"
             }).save(err => {
                 if (err) {
@@ -144,10 +146,11 @@ function initial() {
                 new User({
                     nom: "admin",
                     prenom: "admin",
-                    email: "admin@admin.com",
+                    email: "admin",
                     password: hash,
-                    roleId: "62232a8ca19daaed0de333fc"
-
+                    roles: [{
+                        _id: 1
+                    }],
                 }).save(err => {
                     if (err) {
                         console.log("error", err);
