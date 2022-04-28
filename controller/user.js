@@ -45,13 +45,10 @@ exports.login = (req, res, next) => {
                             error: 'Mot de passe incorrect !'
                         });
                     }
-                    console.log('verification si userId = user._id')
-                    console.log(user._id)
                     res.status(200).json({
-                        userId: user._id,
+                        userId: user_id,
                         token: jwt.sign({
                                 userId: user._id,
-                                userEmail: user.email,
                             },
                             'RANDOM_TOKEN_SECRET', {
                                 expiresIn: '24h'
@@ -71,13 +68,9 @@ exports.login = (req, res, next) => {
 };
 
 exports.infos = (req, res, next) => {
-    console.log('find One');
     const token = req.headers.authorization;
-    console.log(token);
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    console.log(decodedToken);
     const userEmail = decodedToken.userEmail;
-    console.log(userEmail);
     User.findOne({
             email: userEmail
         })

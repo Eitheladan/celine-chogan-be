@@ -5,9 +5,9 @@ const newsCtrl = require('../controller/news')
 const auth = require('../middleware/auth')
 const multer = require('../middleware/multer-config')
 
-router.post('/create', multer, newsCtrl.createNews);
-router.put('/update/:id', multer, newsCtrl.updateNews);
-router.delete('/:id', newsCtrl.deleteNews);
+router.post('/create', auth, multer, newsCtrl.createNews);
+router.put('/update/:id', auth, multer, newsCtrl.updateNews);
+router.delete('/:id', auth, newsCtrl.deleteNews);
 router.get('/:id', newsCtrl.getOneNews);
 router.get('/', newsCtrl.getAllNews);
 

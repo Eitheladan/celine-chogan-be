@@ -50,7 +50,6 @@ exports.deleteNews = (req, res, next) => {
 
 exports.createNews = (req, res, next) => {
     let date = Date();
-    const newsObject = JSON.parse(JSON.stringify(req.body));
     const news = new News({
         // opérateur spread JS
         ...req.body,

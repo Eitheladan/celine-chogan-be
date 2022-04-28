@@ -27,7 +27,7 @@ console.log("DB=>", db);
 
 // connection à la BDD MongoDb
 
-mongoose.connect("mongodb+srv://Admin:DEB8aE8dk2awChL@clustereithel.n2ri2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+mongoose.connect(process.env.MONGODB_CONNECT, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
@@ -39,7 +39,7 @@ mongoose.connect("mongodb+srv://Admin:DEB8aE8dk2awChL@clustereithel.n2ri2.mongod
         process.exit();
     });
 
-// Contre les attaques de type sql injection
+// Contre les attaques de type xss et sql injection
 app.use(helmet());
 
 // Contre les attaques de types DDoS
